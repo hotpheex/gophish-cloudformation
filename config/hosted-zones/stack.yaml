@@ -1,0 +1,5 @@
+template:
+  path: hosted-zones.py
+  type: file
+sceptre_user_data:
+  domains: {{ var.domains }}

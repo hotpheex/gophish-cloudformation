@@ -1,0 +1,16 @@
+template:
+  path: gophish.py
+  type: file
+parameters:
+  InstanceType: {{ var.InstanceType }}
+  VpcId: {{ var.VpcId }}
+  VpcSubnets: {{ var.VpcSubnets }}
+  Ec2Keyname: {{ var.Ec2Keyname }}
+  InitialAdminPassword: {{ var.InitialAdminPassword }}
+  AdminPort: "{{ var.AdminPort }}"
+sceptre_user_data:
+  domains: {{ var.domains }}
+  ingressRules:
+    adminConsole: {{ var.ingressRules.adminConsole }}
+    landingPages: {{ var.ingressRules.landingPages }}
+  ec2UserData: !file templates/ec2_user_data.sh

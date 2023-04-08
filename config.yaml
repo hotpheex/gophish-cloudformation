@@ -1,0 +1,18 @@
+region: us-east-2
+domains:
+  - first.domain
+  - second.domain
+InstanceType: t2.micro
+VpcId: vpc-id
+VpcSubnets:
+  - subnet-id
+  - subnet-id
+  - subnet-id
+Ec2Keyname: key-name
+InitialAdminPassword: password
+AdminPort: 8080
+ingressRules:
+  adminConsole:
+    - 1.1.1.1/32
+  landingPages:
+    - 0.0.0.0/0

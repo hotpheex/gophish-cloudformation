@@ -1,0 +1,4 @@
+project_code: gophish
+region: {{ var.region }}
+stack_tags:
+  name: gophish
