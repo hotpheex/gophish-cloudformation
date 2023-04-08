@@ -12,7 +12,7 @@
 * python 3.10
 * pipenv
 
-## Build platform for a new exercise
+## Deployment Steps
 
 1. Clone this repo
 
