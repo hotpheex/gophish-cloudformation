@@ -7,7 +7,8 @@ validate_requirements() {
 }
 
 get_nameservers() {
-    hosted_zone_ids=$(aws cloudformation --region ap-southeast-2 describe-stacks --stack-name gophish-hosted-zones-stack --query 'Stacks[0].Outputs[].OutputValue' | jq -r '.[]')
+    aws_region=$(grep 'region' config.yaml | cut -d ' ' -f 2)
+    hosted_zone_ids=$(aws cloudformation --region ${aws_region} describe-stacks --stack-name gophish-hosted-zones-stack --query 'Stacks[0].Outputs[].OutputValue' | jq -r '.[]')
 
     printf "\nSet the following DNS nameservers for each domain:\n"
     printf '=%.0s' {1..50}
@@ -26,7 +27,8 @@ get_nameservers() {
 }
 
 print_instance_ip() {
-    instance_metadata=$(aws ec2 describe-instances --filters "Name=tag:Name,Values=Gophish (gophish-platform-stack)" "Name=instance-state-name,Values=running")
+    aws_region=$(grep 'region' config.yaml | cut -d ' ' -f 2)
+    instance_metadata=$(aws ec2 --region ${aws_region} describe-instances --filters "Name=tag:Name,Values=Gophish (gophish-platform-stack)" "Name=instance-state-name,Values=running")
     ip=$(echo "${instance_metadata}" | jq -r '.Reservations[] | .Instances[] | .PublicIpAddress')
 
     printf "\nInstance IP: ${ip}\n"
