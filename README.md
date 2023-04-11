@@ -18,12 +18,14 @@
 
 2. Edit `config.yaml` with your preferences
 
-3. Deploy hosted zones for each phishing domain:
+3. Ensure AWS CLI is configured and authenticated
+
+4. Deploy hosted zones for each phishing domain:
 ```
 ./manage.sh update_zones
 ```
 
-4. Update NS records for each domain to the nameservers listed in script output
+5. Update NS records for each domain to the nameservers listed in script output
 Example:
 ```
 Domain: phish.com
@@ -33,7 +35,7 @@ Domain: phish.com
         ns-1828.awsdns-36.co.uk
 ```
 
-5. Once the records have propogated, build and deploy the Gophish stack:
+6. Once the records have propogated, build and deploy the Gophish stack:
 ```
 ./manage.sh update_platform
 ```
